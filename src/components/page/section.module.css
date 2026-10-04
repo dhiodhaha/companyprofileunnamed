@@ -1,0 +1,422 @@
+/* One container per page: the section sets the max width and the gutters, and everything inside fills its column. */
+.section {
+  padding: var(--space-20) clamp(var(--space-6), 4vw, var(--space-8));
+}
+
+.inner {
+  display: grid;
+  gap: var(--space-10);
+  width: 100%;
+  /* Matches the Arc blocks (stats band, contact, CTA, FAQ columns) so every section shares one left edge. */
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.inner > * {
+  min-width: 0;
+}
+
+/* A reading column narrows its content inside the shared container, so the left edge still lines up. */
+.read .inner > * {
+  max-width: 680px;
+}
+
+.head {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 720px;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-2xl), 1.4rem + 1.6vw, var(--text-3xl));
+  font-weight: 400;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-display);
+  text-wrap: balance;
+}
+
+.lede {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--text-lg);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+/* Page opening. The first section after it keeps its own top padding, so this stays compact. */
+.intro {
+  padding: clamp(112px, 14svh, 144px) clamp(var(--space-6), 4vw, var(--space-8)) 0;
+}
+
+.introInner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+  align-items: center;
+  gap: var(--space-12);
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.introCopy {
+  display: grid;
+  gap: var(--space-5);
+  max-width: 720px;
+}
+
+.introTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-3xl), 1.6rem + 3.4vw, var(--text-4xl));
+  font-weight: 400;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-display);
+  text-wrap: balance;
+}
+
+.introLede {
+  max-width: 620px;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--text-lg);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.introAside {
+  min-width: 0;
+}
+
+.introCopy:only-child {
+  grid-column: 1 / -1;
+}
+
+/* Body copy */
+.prose {
+  display: grid;
+  gap: var(--space-5);
+  max-width: 680px;
+}
+
+.prose p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--text-base);
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.prose :is(h3) {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  letter-spacing: var(--tracking-display);
+  line-height: 1.25;
+}
+
+.prose :is(ul, ol) {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding-left: var(--space-5);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.statement {
+  max-width: 26ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-xl), 1.1rem + 1.6vw, var(--text-3xl));
+  font-weight: 400;
+  letter-spacing: var(--tracking-display);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+/* Labelled facts, such as industry, engagement, and scope */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: var(--space-6) var(--space-8);
+  margin: 0;
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-6);
+}
+
+.fact dt {
+  margin-bottom: var(--space-1);
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.fact dd {
+  margin: 0;
+  font-size: var(--text-base);
+  line-height: 1.5;
+}
+
+/* A grid of short labelled items */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: var(--space-6) var(--space-8);
+}
+
+.features[data-columns="2"] {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+}
+
+.features[data-columns="4"] {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+}
+
+.feature {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-5);
+}
+
+.featureTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 500;
+  letter-spacing: var(--tracking-display);
+  line-height: 1.25;
+}
+
+.featureBody {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+/* Numbered process */
+.steps {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+  list-style: none;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 1fr);
+  gap: var(--space-6);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: var(--space-8) 0;
+}
+
+.stepNumber {
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.4;
+}
+
+.stepBody {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 660px;
+}
+
+.stepTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  letter-spacing: var(--tracking-display);
+  line-height: 1.25;
+}
+
+.stepBody p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.output {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.output strong {
+  color: var(--foreground);
+  font-weight: 500;
+}
+
+/* Cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: var(--space-4);
+}
+
+.grid[data-columns="2"] {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+}
+
+.grid[data-columns="4"] {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+}
+
+.card {
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-surface);
+  padding: var(--space-8);
+  background: var(--surface);
+}
+
+.cardTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  letter-spacing: var(--tracking-display);
+  line-height: 1.25;
+}
+
+.cardBody {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+/* A hairline list, for short items that need no card of their own */
+.list {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.listItem {
+  position: relative;
+  padding-left: var(--space-5);
+  color: var(--text-secondary);
+  font-size: var(--text-base);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.listItem::before {
+  position: absolute;
+  top: .6em;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: var(--radius-pill);
+  background: var(--border-strong);
+  content: "";
+}
+
+/* Two columns of copy and a visual */
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.split > * {
+  min-width: 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.note {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+.linkAction {
+  display: inline-flex;
+  justify-self: start;
+  height: var(--control-height-md);
+  align-items: center;
+  gap: var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  padding: 0 var(--space-5);
+  background: var(--surface);
+  color: var(--foreground);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color var(--duration-fast) var(--ease-standard), border-color var(--duration-fast) var(--ease-standard);
+}
+
+.linkAction[data-primary] {
+  border-color: transparent;
+  background: var(--foreground);
+  color: var(--background);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .linkAction:hover {
+    border-color: var(--border-strong);
+  }
+
+  .linkAction[data-primary]:hover {
+    background: var(--accent-strong);
+    color: var(--accent-foreground);
+  }
+}
+
+@media (max-width: 900px) {
+  .introInner,
+  .split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-10);
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding-block: var(--space-16);
+  }
+
+  .intro {
+    padding-top: var(--space-16);
+  }
+
+  .head {
+    gap: var(--space-3);
+  }
+
+  .card {
+    padding: var(--space-6);
+  }
+
+  .step {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2);
+    padding: var(--space-6) 0;
+  }
+}

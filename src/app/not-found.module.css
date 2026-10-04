@@ -1,0 +1,21 @@
+.page {
+  padding: clamp(112px, 16svh, 160px) clamp(var(--space-6), 4vw, var(--space-8)) var(--space-20);
+}
+
+.inner {
+  display: grid;
+  gap: var(--space-8);
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-3xl), 1.6rem + 3.4vw, var(--text-4xl));
+  font-weight: 400;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-display);
+  text-wrap: balance;
+}

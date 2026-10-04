@@ -1,0 +1,38 @@
+.figure {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+  /* A carded figure is a standalone element, so it stays a comfortable size rather than filling the section. */
+  width: 100%;
+  max-width: 620px;
+  margin-inline: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-surface);
+  padding: var(--space-6);
+  background: var(--background);
+}
+
+/* A bare figure fills its column: in a split it is the visual half, in the hero it is the media. */
+.bare {
+  max-width: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+}
+
+.canvas {
+  min-width: 0;
+}
+
+.caption {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+@media (max-width: 560px) {
+  .figure {
+    padding: var(--space-4);
+  }
+}

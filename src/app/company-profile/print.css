@@ -1,0 +1,551 @@
+/* A4 print document for the Unnamed company profile.
+ * Screen: sheets stack on a muted backdrop with a soft shadow.
+ * Print: each .sheet maps to exactly one A4 page, no chrome, no shadow.
+ * Colors and type come from the Arc tokens only. No raw values here. */
+
+.print-preview {
+  background: color-mix(in oklab, var(--foreground) 9%, var(--background));
+  padding: var(--space-8) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  /* The sheet is a fixed A4 width, so a narrow screen scrolls the preview rather than the page. */
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+.print-bar {
+  width: 210mm;
+  max-width: 100%;
+  background: var(--background);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-surface);
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+}
+
+.print-bar h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-display);
+  margin: 0;
+}
+
+.print-bar p {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin: 0;
+  flex-basis: 100%;
+}
+
+.print-bar .actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-inline-start: auto;
+}
+
+/* One fixed A4 sheet. Height is exact so overflow is visible while building,
+ * never silently repaginated. Keep copy inside the budget. */
+.sheet {
+  width: 210mm;
+  height: 297mm;
+  overflow: hidden;
+  background: var(--background);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-raised);
+  padding: 12mm 14mm 9mm;
+  display: flex;
+  flex-direction: column;
+}
+
+.rule {
+  border-top: 1px solid var(--border-strong);
+  margin-bottom: 6mm;
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5mm;
+}
+
+.foot {
+  display: flex;
+  align-items: baseline;
+  gap: 4mm;
+  border-top: 1px solid var(--border);
+  padding-top: 3mm;
+  margin-top: 4mm;
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+
+.foot .brand {
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.foot .section {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Type. Display and titles are Geist, everything small is Inter.
+ * Weights 400 and 500 only, sizes from the Arc scale. */
+.display {
+  font-family: var(--font-display);
+  font-size: var(--text-5xl);
+  font-weight: 500;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-display);
+  margin: 0;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 500;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-display);
+  margin: 0;
+}
+
+.title-small {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 500;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-display);
+  margin: 0;
+}
+
+.lede {
+  font-size: var(--text-lg);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 150mm;
+}
+
+.copy {
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  letter-spacing: var(--tracking-body);
+  margin: 0;
+  max-width: 160mm;
+}
+
+.small {
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  letter-spacing: var(--tracking-body);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.statement {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  letter-spacing: var(--tracking-display);
+  line-height: 1.25;
+  margin: 0;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Grouped content: one bordered group, hairline dividers, no nested cards. */
+.group {
+  border: 1px solid var(--border);
+  border-radius: 3mm;
+  overflow: hidden;
+}
+
+.group > * + * {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.cell {
+  padding: 4mm 5mm;
+}
+
+.cell h3,
+.item-title {
+  font-size: var(--text-base);
+  font-weight: 500;
+  letter-spacing: var(--tracking-body);
+  line-height: var(--leading-body);
+  margin: 0 0 1mm;
+}
+
+.cell p,
+.item-body {
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  letter-spacing: var(--tracking-body);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4mm;
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4mm;
+}
+
+/* Labelled facts: industry, engagement, scope. */
+.facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4mm;
+  margin: 0;
+}
+
+.facts > div {
+  border-top: 1px solid var(--border-strong);
+  padding-top: 2mm;
+}
+
+.facts dt {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  margin-bottom: 1mm;
+}
+
+.facts dd {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Observable counts. Static ink, tabular numerals, no animation to misprint. */
+.evidence {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 4mm;
+}
+
+.evidence > div {
+  border-top: 1px solid var(--border-strong);
+  padding-top: 2mm;
+}
+
+.evidence .value {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 500;
+  letter-spacing: var(--tracking-display);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.evidence .label {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  margin-top: 1mm;
+}
+
+/* Conversion path strip: discover to inquire. */
+.path {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--border);
+  border-radius: 3mm;
+  overflow: hidden;
+}
+
+.path > .step {
+  flex: 1;
+  padding: 3mm 4mm;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.path > .arrow + .step {
+  border-inline-start: 1px solid var(--border-subtle);
+}
+
+.path > .arrow {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 0 1mm;
+  color: var(--text-secondary);
+}
+
+/* Process steps: compact two column list, numbers are real text. */
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3mm 6mm;
+}
+
+.steps li {
+  display: grid;
+  grid-template-columns: 9mm 1fr;
+  gap: 3mm;
+  align-items: start;
+}
+
+.steps .no {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.steps h3 {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  margin: 0 0 1mm;
+}
+
+.steps p {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.steps .out {
+  color: var(--foreground);
+}
+
+/* Figure frame. Hairline draws at 5:4, so width sets height. */
+.fig {
+  width: 116mm;
+  margin-inline: auto;
+}
+
+.fig.compact {
+  width: 86mm;
+}
+
+.fig.tight {
+  width: 68mm;
+}
+
+/* QR and other open slots: bordered, honest, clearly still to produce. */
+.qr-row {
+  display: flex;
+  gap: 5mm;
+  align-items: center;
+}
+
+.qr {
+  flex: 0 0 auto;
+  width: 30mm;
+  height: 30mm;
+  border: 1px solid var(--border-strong);
+  border-radius: 2mm;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1mm;
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+
+.qr strong {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.slot {
+  border: 1px dashed var(--border-strong);
+  border-radius: 3mm;
+  padding: 4mm 5mm;
+}
+
+.slot p {
+  margin: 0;
+}
+
+.quote {
+  font-size: var(--text-base);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.work-row {
+  display: grid;
+  grid-template-columns: 52mm 34mm 1fr;
+  gap: 4mm;
+  align-items: baseline;
+  padding: 3mm 0;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.work-row:first-of-type {
+  border-top: 1px solid var(--border-strong);
+}
+
+.work-row .name {
+  font-weight: 500;
+  font-size: var(--text-sm);
+}
+
+.work-row .type {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+
+.work-row .note {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+
+.checks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2mm 5mm;
+  font-size: var(--text-sm);
+}
+
+.checks li::before {
+  content: "✓ ";
+}
+
+.cta-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4mm;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 3mm;
+}
+
+.studio-block {
+  border: 1px solid var(--border-strong);
+  border-radius: 3mm;
+  padding: 5mm 6mm;
+  display: grid;
+  gap: 1mm;
+}
+
+.studio-block .name {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 500;
+  letter-spacing: var(--tracking-display);
+}
+
+.studio-block .line {
+  font-size: var(--text-sm);
+}
+
+.spread {
+  margin-top: auto;
+}
+
+/* Plain lists in a cell or the body. The checks list stays for ticked capabilities. */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.5mm;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.list.cols {
+  grid-template-columns: 1fr 1fr;
+  column-gap: 6mm;
+}
+
+.list > li {
+  position: relative;
+  padding-inline-start: 5mm;
+}
+
+.list > li::before {
+  position: absolute;
+  inset-inline-start: 0;
+  top: .5em;
+  width: 1.6mm;
+  height: 1.6mm;
+  border-radius: 9999px;
+  background: var(--border-strong);
+  content: "";
+}
+
+/* A row of a group that pairs a label with its value. */
+.row {
+  display: grid;
+  grid-template-columns: 40mm 1fr;
+  gap: 5mm;
+  align-items: baseline;
+}
+
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+@media print {
+  .print-bar {
+    display: none;
+  }
+
+  .print-preview {
+    background: none;
+    padding: 0;
+    gap: 0;
+    display: block;
+  }
+
+  .sheet {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+    page-break-after: always;
+  }
+
+  .sheet:last-child {
+    page-break-after: auto;
+  }
+
+  * {
+    print-color-adjust: exact;
+  }
+}
